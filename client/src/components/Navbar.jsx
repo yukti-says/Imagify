@@ -6,7 +6,7 @@ import { AppContext } from "../context/AppContext";
 const Navbar = () => {
   // state to check if user is logged in or not
   // get user from context
-  const { user } = useContext(AppContext);
+  const { user , setShowLogin } = useContext(AppContext);
     // if null , user is not logged in, if object then user is logged in
     
  const navigate = useNavigate();
@@ -54,7 +54,11 @@ const Navbar = () => {
             >
               Pricing
             </p>
-            <button className="bg-zinc-700 hover:bg-zinc-800 text-white px-7 py-2 sm:px-10 text-sm rounded-full">
+              <button
+                onClick={() => {
+                  setShowLogin(true);
+                }}
+                className="bg-zinc-700 hover:bg-zinc-800 text-white px-7 py-2 sm:px-10 text-sm rounded-full">
               Login
             </button>
           </div>
