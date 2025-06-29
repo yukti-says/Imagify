@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import 'dotenv/config'
 import connectDB from './config/Mongodb.js';
+import userRoutes from './routes/userRoute.js';
 
 const PORT = process.env.PORT || 4000;
 const app = express()
@@ -11,6 +12,9 @@ app.use(express.json())
 app.use(cors())
 await connectDB()
 
+
+// using userRoutes in app
+app.use('/api/user', userRoutes)
 app.get('/', (req, res) => {
     res.send('hello yukti ji')
 })

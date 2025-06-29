@@ -37,6 +37,7 @@ const registerUser = async (req, res) => {
         // send this data in response
         res.status(201).json({
             success: true,
+            message: "User registered successfully",
             token,
             user:{name:user.name}
         })
@@ -78,6 +79,7 @@ const loginUser = async (req, res) => {
         });
         res.status(200).json({
             success: true,
+            message: "User logged in successfully",
             token,
             user:{name:user.name}
         });
@@ -94,3 +96,7 @@ const loginUser = async (req, res) => {
         
     }
 }
+
+
+// export these functions so we can use it in userRoute.js
+export { registerUser, loginUser };
