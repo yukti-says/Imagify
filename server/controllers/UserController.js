@@ -97,6 +97,27 @@ const loginUser = async (req, res) => {
     }
 }
 
+// controller for user credit
+const userCredit = async (req, res) => {
+    try {
+        // needed user if to get credit balance
+       const {userId} = req.body;
+        // get user from database using userId
+        const user = await userModel.findById(userId);
+        // check if user is there with this id
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+        
+        
+    }
+    catch(error) {
+        
+    }
+}
 
 // export these functions so we can use it in userRoute.js
 export { registerUser, loginUser };
