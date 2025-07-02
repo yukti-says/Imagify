@@ -10,7 +10,7 @@ const router = Router();
 
 router.post('/register', registerUser);
 router.post('/login', loginUser);
-router.post("/credits",userAuth, userCredit);
+router.get("/credits",userAuth, userCredit);
 
 
 // export this router so we can use it in server.js
