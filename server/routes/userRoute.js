@@ -1,6 +1,7 @@
-import {registerUser , loginUser} from "../controllers/UserController.js";
+import {registerUser , loginUser, userCredit} from "../controllers/UserController.js";
 import express from "express";
 import { Router } from "express";
+import { userAuth } from "../middleware/auth.js";
 
 
 const router = Router();
@@ -9,6 +10,7 @@ const router = Router();
 
 router.post('/register', registerUser);
 router.post('/login', loginUser);
+router.post("/credits",userAuth, userCredit);
 
 
 // export this router so we can use it in server.js

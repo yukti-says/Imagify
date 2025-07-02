@@ -101,6 +101,7 @@ const loginUser = async (req, res) => {
 const userCredit = async (req, res) => {
     try {
         // needed user if to get credit balance
+        // providing user ID with the help of middleware
        const {userId} = req.body;
         // get user from database using userId
         const user = await userModel.findById(userId);
@@ -111,13 +112,21 @@ const userCredit = async (req, res) => {
                 message: "User not found"
             });
         }
+        res.json({
+            success: true,
+            credits: user.creditBalance,
+            user:{name:user.name}
+        })
         
         
     }
     catch(error) {
-        
+        res.json({
+            success:false,
+            message:error.message
+        })
     }
 }
 
 // export these functions so we can use it in userRoute.js
-export { registerUser, loginUser };
+export { registerUser, loginUser , userCredit };
