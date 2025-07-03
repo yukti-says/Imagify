@@ -1,3 +1,5 @@
+dotenv.config();
+
 // connect with mongodb
 import mongoose from "mongoose";
 
