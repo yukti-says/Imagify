@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
-import { data } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 export const AppContext = createContext();
 
@@ -18,6 +18,8 @@ const AppContextProvider = (props) => {
 
   // adding for backend url
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+  const navigate = useNavigate()
 
   const loadCreditData = async () => {
     try {
@@ -36,6 +38,33 @@ const AppContextProvider = (props) => {
     }
     };
     
+  // function for generating prompt uing api
+  const generateImage = async (prompt) => {
+    try {
+      // calling image generate api
+      const { data } = await axios.post(backendUrl + '/api/image/generate-image', { prompt }, { headers: { token } })
+      // checking data
+      if (data.success) {
+        // load the credit
+        loadCreditData() //this will display available credits after generating the image
+        return data.resultImage
+
+      }
+      else {
+        toast.error(data.message)
+        loadCreditData()
+        if (data.creditBalance === 0) {
+          // then user will be redirected to the buy credit page
+          navigate('/buy')
+          // so after this all this generateimage function will be called when clicked on button so fixing that 
+
+        }
+      }
+    }
+    catch (error) {
+      toast.error(error.message)
+    }
+  }
     
 
   // logout feature
@@ -65,6 +94,7 @@ const AppContextProvider = (props) => {
     setCredit,
     loadCreditData,
     logout,
+    generateImage
   };
 
   return (
