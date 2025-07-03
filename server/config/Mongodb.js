@@ -18,7 +18,7 @@ async function connectDB() {
             console.log('database connected');
             
         })
-        await mongoose.connect(`${process.env.MONGODB_URL}/imagify`);
+        await mongoose.connect(process.env.MONGODB_URL);
         // console.log("MongoDB connected successfully");
     }
     catch (error) {
